@@ -50,13 +50,21 @@ const promptMenu = () => {
 
 const viewAllDepartments = () => {
     connection.query(
-
-    )
-};
+    'SELECT * from department', (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        promptMenu();
+    });
+  };
 
 const viewAllRoles = () => {
-
-};
+    connection.query(
+    'SELECT * FROM role;', (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        promptMenu();
+      });
+  };
 
 const viewAllEmployees = () => {
 
