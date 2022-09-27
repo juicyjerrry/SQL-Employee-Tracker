@@ -43,7 +43,7 @@ const promptMenu = () => {
                     updateRole();
                     break;
                 default:
-                    process.exit();
+                    process.exit(); //https://nodejs.org/api/process.html#processabort
             }
         });
 };
@@ -56,4 +56,24 @@ const viewAllRoles = () => {
 
 };
 
-const selectEmployees
+const viewAllEmployees = () => {
+
+};
+
+const addDepartment = () => {
+    
+};
+
+const addRole = () => {
+    
+};
+
+const addEmployee = () => {
+    
+};
+
+const updateRole = () => {
+    
+};
+
+promptMenu();
