@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require("fs");
 const mysql = require('mysql2');
-const { createConnection } = require('net');
+// const { createConnection } = require('net'); //where did this come from?
 
 // connection to database
 var connection = mysql.createConnection({
