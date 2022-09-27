@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/juicyjerrry/SQL-Employee-Tracker#readme",
   "dependencies": {
-    "inquirer": "^9.1.2",
-    "mysql": "^2.18.1"
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3"
   }
 }

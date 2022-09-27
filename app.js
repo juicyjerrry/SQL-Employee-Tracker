@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require("fs");
 const mysql = require('mysql2');
+require ('console.table');
 // const { createConnection } = require('net'); //where did this come from?
 
 // connection to database
@@ -50,7 +51,7 @@ const promptMenu = () => {
 
 const viewAllDepartments = () => {
     connection.query(
-    'SELECT * from department', (err, res) => {
+    'SELECT * from department;', (err, res) => {
         if (err) throw err;
         console.table(res);
         promptMenu();
@@ -67,8 +68,13 @@ const viewAllRoles = () => {
   };
 
 const viewAllEmployees = () => {
-
-};
+    connection.query(
+        'SELECT employee.emp_id, employee.first_name, employee.last_name, role.title, role.salary, department.name AS department, CONCAT(manager.first_name, " ", manager.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.role_id LEFT JOIN department ON role.department_id = department.dept_id LEFT JOIN employee manager ON manager.emp_id = employee.manager_id;', (err, res) => {
+            if (err) throw err;
+            console.table(res);
+            promptMenu();
+          });
+      };
 
 const addDepartment = () => {
     

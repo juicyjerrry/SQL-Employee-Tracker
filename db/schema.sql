@@ -14,7 +14,7 @@ CREATE TABLE role(
   department_id INTEGER,
   CONSTRAINT fk_department
   FOREIGN KEY(department_id)
-  REFERENCES department(id)
+  REFERENCES department(dept_id)
   ON DELETE SET NULL
 );
 
@@ -25,15 +25,13 @@ CREATE TABLE employee(
   role_id INTEGER,
   manager_id INTEGER,
 
-  --reference role_id, set role(id) to null when deleted 
   CONSTRAINT fk_role
   FOREIGN KEY(role_id)
-  REFERENCES role(id)
+  REFERENCES role(role_id)
   ON DELETE SET NULL,
 
   CONSTRAINT fk_manager
   FOREIGN KEY(manager_id)
-  REFERENCES employee(id)
+  REFERENCES employee(emp_id)
   ON DELETE SET NULL
-  --https: //www.techonthenet.com/sql_server/foreign_keys/foreign_delete_null.php
 );
