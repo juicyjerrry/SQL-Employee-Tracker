@@ -3,12 +3,12 @@ const fs = require("fs");
 const mysql = require('mysql2');
 const { createConnection } = require('net');
 
-// create the connection to database
+// connection to database
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     database: 'employeeDb',
-    password: 'password'
+    password: 'Cafecorazon96' //remember to change this before submitting
 })
 
 const promptMenu = () => {
@@ -49,7 +49,9 @@ const promptMenu = () => {
 };
 
 const viewAllDepartments = () => {
+    connection.query(
 
+    )
 };
 
 const viewAllRoles = () => {

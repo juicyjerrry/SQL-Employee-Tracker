@@ -1,0 +1,19 @@
+{
+  "name": "sql-employee-tracker",
+  "version": "1.0.0",
+  "description": "This is a **content management systems (CMS)** that will manage a company's employee database using Node.js, Inquirer, and MySQL",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juicyjerrry/SQL-Employee-Tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juicyjerrry/SQL-Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/juicyjerrry/SQL-Employee-Tracker#readme"
+}
