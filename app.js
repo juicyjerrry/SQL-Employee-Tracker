@@ -98,8 +98,46 @@ const addDepartment = () => {
 };
 
 const addRole = () => {
-    
-};
+    connection.promise().query(
+        "SELECT department.dept_id, department.name FROM department;"
+    )
+        .then(([departments]) => {
+            let departmentChoices = departments.map(({
+                id,
+                name
+            }) => ({
+                name: name,
+                value: id
+            }))
+
+            inquirer.prompt(
+                [{
+                    type: 'input',
+                    name: 'title',
+                    message: 'Enter the title of the added role',
+                    validate: titleName => {
+                        if (titleName) {
+                            return true;
+                        } else {
+                            console.log('Enter the title of the added role');
+                            return false;
+                        }
+                    }
+                }
+                .then(({ title, department, salary }) => {
+                    const query = connection.query(
+                        'INSERT INTO role SET ?',
+                        {
+                            title: title,
+                            department_id: department,
+                            salary: salary
+                        },
+                        function (err, res) {
+                            if (err) throw err;
+                        }
+                    )
+                }).then(() => viewAllRoles())}
+        )};
 
 const addEmployee = () => {
     
