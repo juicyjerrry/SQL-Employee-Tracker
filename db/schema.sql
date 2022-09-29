@@ -22,8 +22,8 @@ CREATE TABLE employee(
   emp_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
-  role_id INTEGER,
-  manager_id INTEGER,
+  role_id INT,
+  manager_id INT,
 
   CONSTRAINT fk_role
   FOREIGN KEY(role_id)

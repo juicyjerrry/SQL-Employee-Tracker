@@ -241,7 +241,7 @@ const addEmployee = () => {
                             },
                             function (err, res) {
                                 if (err) throw err;
-                                console.log({ role, manager })
+                                console.log({ role, manager }) //idk lol
                             }
                         )
                     })
