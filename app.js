@@ -123,9 +123,30 @@ const addRole = () => {
                             return false;
                         }
                     }
+                },
+                {
+                    type: 'list',
+                    name: 'department',
+                    message: 'Which department are you from?',
+                    choices: departmentChoices
+                },
+                {
+                    type: 'input',
+                    name: 'salary',
+                    message: 'Enter your salary with number characters only!',
+                    validate: salary => {
+                        if (salary) {
+                            return true;
+                        } else {
+                            console.log('Enter your salary with number characters only!');
+                            return false;
+                        }
+                    }
                 }
+                ]
+            )
                 .then(({ title, department, salary }) => {
-                    const query = connection.query(
+                        connection.query(
                         'INSERT INTO role SET ?',
                         {
                             title: title,
@@ -134,6 +155,7 @@ const addRole = () => {
                         },
                         function (err, res) {
                             if (err) throw err;
+                            console.log(`role added successfully!`)
                         }
                     )
                 }).then(() => viewAllRoles())}
