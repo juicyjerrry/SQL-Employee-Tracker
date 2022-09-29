@@ -77,7 +77,24 @@ const viewAllEmployees = () => {
       };
 
 const addDepartment = () => {
-    
+    inquirer.prompt([{
+        type: 'input',
+        name: 'name',
+        message: 'Give a name to the department you will be adding',
+        validate: deptName => {
+            if (deptName) {
+                return true;
+            } else {
+                console.log('Give a name to the department you will be adding');
+                return false;
+            }
+        }
+    }
+    ])
+        .then(name => {
+            connection.promise().query("INSERT INTO department SET ?", name);
+            viewAllDepartments();
+        })
 };
 
 const addRole = () => {
