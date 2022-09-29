@@ -98,6 +98,7 @@ const addDepartment = () => {
 };
 
 const addRole = () => {
+    // calling departmentChoices into function so there is a selection menu
     connection.promise().query(
         "SELECT department.dept_id, department.name FROM department;"
     )
@@ -162,7 +163,32 @@ const addRole = () => {
         )};
 
 const addEmployee = () => {
-    
+
+    return connection.promise().query(
+        "SELECT R.id, R.title FROM role R;"
+    )
+        .then(([employees]) => {
+            let titleChoices = employees.map(({
+                id,
+                title
+
+            }) => ({
+                value: id,
+                name: title
+            }))
+
+            connection.promise().query(
+                "SELECT E.id, CONCAT(E.first_name,' ',E.last_name) AS manager FROM employee E;"
+            ).then(([managers]) => {
+                let managerChoices = managers.map(({
+                    id,
+                    manager
+                }) => ({
+                    value: id,
+                    name: manager
+                }));
+                }
+        )},
 };
 
 const updateRole = () => {
