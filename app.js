@@ -230,27 +230,18 @@ const addEmployee = () => {
                     }
 
                     ])
-                    .then(({ firstName, lastName, manager }) => {
+                    .then(({ firstName, lastName, role, manager }) => {
                         connection.query(
                             'INSERT INTO employee SET ?',
                             {
                                 first_name: firstName,
                                 last_name: lastName,
+                                role_id: role,
                                 manager_id: manager
                             },
                             function (err, res) {
                                 if (err) throw err;
-                            }
-                        )
-                    })
-                    .then(({ title }) => {
-                        connection.query(
-                            'INSERT INTO role SET ?',
-                            {
-                                title: title,
-                            },
-                            function (err, res) {
-                                if (err) throw err;
+                                console.log({ role, manager })
                             }
                         )
                     })
