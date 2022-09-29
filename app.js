@@ -165,7 +165,7 @@ const addRole = () => {
 const addEmployee = () => {
 
     return connection.promise().query(
-        "SELECT R.id, R.title FROM role R;"
+        "SELECT role.role_id, role.title FROM role;"
     )
         .then(([employees]) => {
             let titleChoices = employees.map(({
@@ -177,19 +177,87 @@ const addEmployee = () => {
                 name: title
             }))
 
-            connection.promise().query(
-                "SELECT E.id, CONCAT(E.first_name,' ',E.last_name) AS manager FROM employee E;"
-            ).then(([managers]) => {
-                let managerChoices = managers.map(({
-                    id,
-                    manager
-                }) => ({
-                    value: id,
-                    name: manager
-                }));
-                }
-        )},
-};
+        connection.promise().query(
+            "SELECT employee.emp_id, CONCAT(employee.first_name,' ',employee.last_name) AS manager FROM employee;"
+        ).then(([managers]) => {
+            let managerChoices = managers.map(({
+                id,
+                manager
+
+            }) => ({
+                value: id,
+                name: manager
+            }));
+
+                inquirer.prompt(
+                    [{
+                        type: 'input',
+                        name: 'firstName',
+                        message: 'Please enter the first name of your employee',
+                        validate: firstName => {
+                            if (firstName) {
+                                return true;
+                            } else {
+                                console.log('Please enter the first name of your employee');
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        type: 'input',
+                        name: 'lastName',
+                        message: 'Please enter the last name of your employee',
+                        validate: lastName => {
+                            if (lastName) {
+                                return true;
+                            } else {
+                                console.log('Please enter the last name of your employee');
+                                return false;
+                            }
+                        }
+                    },
+                    {
+                        type: 'list',
+                        name: 'title',
+                        message: 'Select a title for the employee from the list below',
+                        choices: titleChoices
+                    },
+                    {
+                        type: 'list',
+                        name: 'manager',
+                        message: 'Select a manager for the employee from the list below',
+                        choices: managerChoices
+                    }
+
+                    ])
+                    .then(({ firstName, lastName, manager }) => {
+                        connection.query(
+                            'INSERT INTO employee SET ?',
+                            {
+                                first_name: firstName,
+                                last_name: lastName,
+                                manager_id: manager
+                            },
+                            function (err, res) {
+                                if (err) throw err;
+                            }
+                        )
+                    })
+                    .then(({ title }) => {
+                        connection.query(
+                            'INSERT INTO role SET ?',
+                            {
+                                title: title,
+                            },
+                            function (err, res) {
+                                if (err) throw err;
+                            }
+                        )
+                    })
+                    .then(() => viewAllEmployees())
+            })
+        })
+}
 
 const updateRole = () => {
     
