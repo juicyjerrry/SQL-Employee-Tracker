@@ -9,7 +9,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     database: 'employeeDb',
-    password: 'Cafecorazon96' //remember to change this before submitting
+    password: '' //remember to change this before submitting
 })
 
 const promptMenu = () => {
